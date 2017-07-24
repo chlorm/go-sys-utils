@@ -1,4 +1,4 @@
-// Copyright 2017 Cody Opel <codyopel@gmail.com>
+// Copyright (c) 2017, Cody Opel <codyopel@gmail.com>
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,14 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package findbinpath
+// TODO:
+// - Allow returning absolute path (e.g. os.Readlink)
+
+package sysutils
 
 import (
   "os"
   "strings"
 )
 
-// Check for an executable in all paths return by the PATH environment
+// Check for an executable in all paths returned by the PATH environment
 // variable.
 func FindBinPath(executable string) (*string, error) {
   paths := strings.Split(os.Getenv("PATH"), ":")
