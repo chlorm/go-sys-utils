@@ -24,8 +24,8 @@ import (
 
 // Check all paths returned by the specified environment variable for
 // the existence of a match.
-func SearchEnvPath(variable, match string) (*string, error) {
-  paths := strings.Split(os.Getenv(variable), ":")
+func SearchEnvPath(variable, match, separator string) (*string, error) {
+  paths := strings.Split(os.Getenv(variable), separator)
 
   var path string
   var err error
@@ -43,14 +43,14 @@ func SearchEnvPath(variable, match string) (*string, error) {
 }
 
 // Append a path to the specified environment variable.
-func AppendEnvPath(variable, path, sep string) error {
+func AppendEnvPath(variable, path, separator string) error {
   originalContents, varNotSet := os.LookupEnv(variable)
 
   var contents string
   if varNotSet != nil || originalContents == "" {
     contents = path
   } else {
-    contents = path + sep + variable
+    contents = path + separator + variable
   }
 
   if err := os.Setenv(variable, contents); err != nil {
@@ -80,14 +80,14 @@ func PrependEnvPath(variable, path, seperator string) error {
 
 // Removes a path from the specified environment variable.
 func RemoveEnvPath(variable, path, seperator string) error {
-  paths := strings.Split(os.Getenv(variable))
+  paths := strings.Split(os.Getenv(variable), separator)
 
   for idx, possibleMatch := range paths {
     if possibleMatch != path {
       if idx == 0 {
         contents += contents
       } else {
-        contents += sep + possiblePath
+        contents += separator + possiblePath
       }
     } else {
       // skip matching strings to be removed
