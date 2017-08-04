@@ -79,15 +79,16 @@ func PrependEnvPath(variable, path, seperator string) error {
 }
 
 // Removes a path from the specified environment variable.
-func RemoveEnvPath(variable, path, seperator string) error {
+func RemoveEnvPath(variable, path, separator string) error {
   paths := strings.Split(os.Getenv(variable), separator)
 
+  var contents string
   for idx, possibleMatch := range paths {
     if possibleMatch != path {
       if idx == 0 {
         contents += contents
       } else {
-        contents += separator + possiblePath
+        contents += separator + possibleMatch
       }
     } else {
       // skip matching strings to be removed
