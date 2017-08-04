@@ -24,7 +24,7 @@ import (
 
 // Check all paths returned by the specified environment variable for
 // the existence of a match.
-func SearchEnvPath(variable, match, separator string) (*string, error) {
+func SearchEnvPath(variable, separator, match string) (*string, error) {
   paths := strings.Split(os.Getenv(variable), separator)
 
   var possibleMatch string
@@ -43,7 +43,7 @@ func SearchEnvPath(variable, match, separator string) (*string, error) {
 }
 
 // Append a path to the specified environment variable.
-func AppendEnvPath(variable, path, separator string) error {
+func AppendEnvPath(variable, separator, path string) error {
   originalContents, varSet := os.LookupEnv(variable)
 
   var contents string
@@ -61,7 +61,7 @@ func AppendEnvPath(variable, path, separator string) error {
 }
 
 // Prepends a path to the specified environment variable.
-func PrependEnvPath(variable, path, seperator string) error {
+func PrependEnvPath(variable, seperator, path string) error {
   originalContents, varSet := os.LookupEnv(variable)
 
   var contents string
@@ -79,7 +79,7 @@ func PrependEnvPath(variable, path, seperator string) error {
 }
 
 // Removes a path from the specified environment variable.
-func RemoveEnvPath(variable, path, separator string) error {
+func RemoveEnvPath(variable, separator, path string) error {
   paths := strings.Split(os.Getenv(variable), separator)
 
   var contents string
