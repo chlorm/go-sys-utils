@@ -44,10 +44,10 @@ func SearchEnvPath(variable, match, separator string) (*string, error) {
 
 // Append a path to the specified environment variable.
 func AppendEnvPath(variable, path, separator string) error {
-  originalContents, varNotSet := os.LookupEnv(variable)
+  originalContents, varSet := os.LookupEnv(variable)
 
   var contents string
-  if varNotSet != nil || originalContents == "" {
+  if varSet == false || originalContents == "" {
     contents = path
   } else {
     contents = path + separator + variable
@@ -62,10 +62,10 @@ func AppendEnvPath(variable, path, separator string) error {
 
 // Prepends a path to the specified environment variable.
 func PrependEnvPath(variable, path, seperator string) error {
-  originalContents, varNotSet := os.LookupEnv(variable)
+  originalContents, varSet := os.LookupEnv(variable)
 
   var contents string
-  if varNotSet != nil || originalContents == "" {
+  if varSet == false || originalContents == "" {
     contents = path
   } else {
     contents = variable + seperator + path
