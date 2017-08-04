@@ -27,14 +27,14 @@ import (
 func SearchEnvPath(variable, match, separator string) (*string, error) {
   paths := strings.Split(os.Getenv(variable), separator)
 
-  var path string
+  var possibleMatch string
   var err error
 
   for _, possiblePath := range paths {
     // XXX: maybe support searching subdirs
-    path = path.Join(possiblePath, match)
-    if _, err = os.Stat(path); err == nil {
-      return &path, nil
+    possibleMatch = path.Join(possiblePath, match)
+    if _, err = os.Stat(possibleMatch); err == nil {
+      return &possibleMatch, nil
     }
   }
 
