@@ -100,7 +100,7 @@ func RemoveEnvPath(variable, path, separator string) error {
   if contents == "" {
     err = os.Unsetenv(variable)
   } else {
-    err = os.Setenv(contents)
+    err = os.Setenv(variable, contents)
   }
   if err != nil {
     return err
